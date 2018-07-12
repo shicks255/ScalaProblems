@@ -20,8 +20,13 @@ package CodeWars.CenturyFromYear
 object CenturyYear {
   def centuryFromYear(year: Int): Int =
   {
-
-
     1
+  }
+}
+
+object Main2{
+  def main(args: String) =
+  {
+    println("Hello " + args)
   }
 }
