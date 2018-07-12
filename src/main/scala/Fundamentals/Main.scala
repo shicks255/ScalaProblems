@@ -17,10 +17,13 @@ object Utilities {
 
   def printFirstLetter(word: String) = {
     println(word.head)
+    println(word.take(1)) //another way to do it
   }
 
   def printLastLetter(word: String) = {
-    println(word(word.length - 1))
+//    println(word(word.length - 1))
+    //better way to do it
+    println(word.takeRight(1))
   }
 
 }
