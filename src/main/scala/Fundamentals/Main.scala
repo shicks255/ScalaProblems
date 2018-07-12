@@ -6,6 +6,7 @@ object Main extends App{
 
   Utilities.printFirstLetter("steven")
   Utilities.printLastLetter("steven")
+  Utilities.printStringMultiply("steven")
 
 }
 
@@ -24,6 +25,10 @@ object Utilities {
 //    println(word(word.length - 1))
     //better way to do it
     println(word.takeRight(1))
+  }
+
+  def printStringMultiply(word: String) = {
+    println(word * 3)
   }
 
 }
