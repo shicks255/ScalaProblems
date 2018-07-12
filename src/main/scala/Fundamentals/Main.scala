@@ -4,9 +4,8 @@ object Main extends App{
 
   Utilities.printSomeStrings(1)
 
-
-
-
+  Utilities.printFirstLetter("steven")
+  Utilities.printLastLetter("steven")
 
 }
 
@@ -17,11 +16,11 @@ object Utilities {
   }
 
   def printFirstLetter(word: String) = {
-
+    println(word.head)
   }
 
   def printLastLetter(word: String) = {
-
+    println(word(word.length - 1))
   }
 
 }
