@@ -20,13 +20,20 @@ package CodeWars.CenturyFromYear
 object CenturyYear {
   def centuryFromYear(year: Int): Int =
   {
-    1
+    val suffix = year.toString.takeRight(2).toInt
+    val prefix = year.toString.take(year.toString.size - 2).toInt
+
+    if (suffix > 0)
+      prefix + 1
+    else
+      prefix
   }
 }
 
 object Main2{
   def main(args: String) =
   {
-    println("Hello " + args)
+    println(CenturyYear.centuryFromYear(1705))
+    println(CenturyYear.centuryFromYear(1900))
   }
 }
