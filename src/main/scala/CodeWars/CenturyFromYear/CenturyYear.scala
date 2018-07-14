@@ -31,8 +31,7 @@ object CenturyYear {
 }
 
 object Main2{
-  def main(args: String) =
-  {
+  def main(args: String) = {
     println(CenturyYear.centuryFromYear(1705))
     println(CenturyYear.centuryFromYear(1900))
   }
