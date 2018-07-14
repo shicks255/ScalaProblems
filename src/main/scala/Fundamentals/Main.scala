@@ -1,12 +1,14 @@
 package Fundamentals
 
 object Main extends App{
-  Utilities.printSomeStrings(1)
-  Utilities.printFirstLetter("steven")
-  Utilities.printLastLetter("steven")
-  Utilities.printStringMultiply("steven")
-  Utilities.oldEnoughToDrink(21)
-  Utilities.oldEnoughToDrink(2)
+//  Utilities.printSomeStrings(1)
+//  Utilities.printFirstLetter("steven")
+//  Utilities.printLastLetter("steven")
+//  Utilities.printStringMultiply("steven")
+//  Utilities.oldEnoughToDrink(21)
+//  Utilities.oldEnoughToDrink(2)
+
+  Utilities.advancedLoop()
 }
 
 object Utilities {
@@ -20,10 +22,16 @@ object Utilities {
       println(age + " is not old enough to drink")
   }
 
-//  For Loops
+//  Loops
   def printSomeStrings(number: Int) = {
     for (i <- 1 to number)
       println("Line# " + i)
+  }
+
+  //loop with 2 generators, and a guard
+  def advancedLoop() = {
+    for (i <- 1 to 10; j <- 1 to 2 if j > 1)
+      println(10 * i + j + "")
   }
 
 //  String Manipulation
