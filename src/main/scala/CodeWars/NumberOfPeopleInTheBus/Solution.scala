@@ -16,17 +16,15 @@ and they are probably sleeping there :D
 
 package CodeWars.NumberOfPeopleInTheBus
 
-import scala.collection.mutable.ArrayBuffer
-
-object Solution {
+object Solution extends App{
 
   var list = List((10, 0), (3, 5), (5, 8))
-
-  Bus.number(list)
+  println(Bus.number(list))
 }
 
 object Bus {
   def number(busStops: List[(Int, Int)]): Int = {
-    1
+    var counter = for (stop <- busStops) yield stop._1 - stop._2
+    counter.sum
   }
 }
