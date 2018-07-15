@@ -12,10 +12,40 @@ object Main extends App{
 //  Utilities.advancedLoop()
 //  Utilities.makeArray(10)
 //  Utilities.makeArrayBuffer("Steven")
-  Utilities.makeArrayWithTrim("Test")
+//  Utilities.makeArrayWithTrim("Test")
+//  Utilities.arrayEveryOther()
+//  Utilities.yieldFromArray()
+  Utilities.playWithArray()
 }
 
 object Utilities {
+
+//  Common array and ArrayBuffer algorithms
+  def playWithArray() = {
+    var myArray = Array[String]("Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun")
+
+    println(myArray.max)
+    println(myArray.min)
+//    val sorted = myArray.sorted(_<_)
+//    println(sorted)
+  }
+
+  //yielding a new array from an array
+  def yieldFromArray() = {
+    var anArray = Array[String]("S", "S", "t", "t", "e", "e", "v", "v", "e", "e", "n", "n")
+    val newArray = for (let <- 0 until(anArray.length, 2))
+      yield anArray(let)
+
+    print(newArray)
+  }
+
+  //traversing every other element
+  def arrayEveryOther() = {
+    var anArray = Array[Int](1,2,3,4,5,6,7,8,9,10)
+
+    for (i <- 0 until (anArray.length, 3))
+      println(i)
+  }
 
   //trimming arrayBuffer
   def makeArrayWithTrim(word: String) = {
