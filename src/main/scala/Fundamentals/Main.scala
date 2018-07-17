@@ -16,19 +16,44 @@ object Main extends App{
 //  Utilities.arrayEveryOther()
 //  Utilities.yieldFromArray()
 //  Utilities.playWithArray()
-  Utilities.makeAMap()
-
+//  Utilities.makeAMap()
+  Utilities.makeMutableMap
 }
 
 object Utilities {
+
+  def makeMutableMap: Unit ={
+    var map = scala.collection.mutable.Map[String, Int]()
+    map("Steve") = 1
+    map("Eric") = 2
+
+    println(map)
+
+    //adding multiple values
+    map += (("kara", 2), ("Tom", 4))
+    println(map)
+
+    //removing a value
+    map -= "kara"
+    println(map)
+  }
 
   def makeAMap(): Unit =
   {
     var mapp = Map("Steve" -> 1, "Bob" -> 2)
     println(mapp)
 
-    var mapVersion2 = Map(("Steve", 3), ("Bob", 4))
-    println(mapVersion2)
+    val steveAge = mapp("Steve")
+    println(steveAge)
+
+    val eric = mapp.getOrElse("Eric", "The value doesn't exists")
+    println(eric)
+
+    //this line will produce error, because the key doesn't exist in map
+//    val thisWillbeError = mapp("Eric")
+
+//    var mapVersion2 = Map(("Steve", 3), ("Bob", 4))
+//    println(mapVersion2)
   }
 
 //  Common array and ArrayBuffer algorithms
