@@ -18,17 +18,37 @@ object Main extends App{
 //  Utilities.playWithArray()
 //  Utilities.makeAMap()
 //  Utilities.makeMutableMap
-  Utilities.iterateOverMap
+//  Utilities.iterateOverMap
+  Utilities.sortedMap()
 }
 
 object Utilities {
+
+  def sortedMap() = {
+    val scores = scala.collection.mutable.SortedMap("Alice" -> 65,
+      "Steve" -> 29, "Steph" -> 27, "Eric" -> 30, "M" -> 30)
+    for ((k, v) <- scores)
+      println(k + " is " + v + " years old")
+
+    println("BREAK")
+
+    val insertionOrderMap = scala.collection.mutable.LinkedHashMap("Alice" -> 65,
+      "Steve" -> 29, "Steph" -> 27, "Eric" -> 30, "M" -> 30)
+    for ((k, v) <- insertionOrderMap)
+      println(s"${k} is ${v} years old")
+
+    var reverse = for ((k,v) <- insertionOrderMap) yield (v, k)
+    println(reverse)
+  }
 
   def iterateOverMap = {
     var map = Map("Boo" -> "cat", "brandy" -> "dog")
 
     for ((k,v) <- map)
-      print(k + " " + v)
+      print("The key is " + k + " and the value is " + v + "\n\r")
 
+    val animalTypes = for (v <- map.values)
+      println(v)
   }
 
   def makeMutableMap: Unit ={
