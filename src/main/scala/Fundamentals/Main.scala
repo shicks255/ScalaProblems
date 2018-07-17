@@ -17,10 +17,19 @@ object Main extends App{
 //  Utilities.yieldFromArray()
 //  Utilities.playWithArray()
 //  Utilities.makeAMap()
-  Utilities.makeMutableMap
+//  Utilities.makeMutableMap
+  Utilities.iterateOverMap
 }
 
 object Utilities {
+
+  def iterateOverMap = {
+    var map = Map("Boo" -> "cat", "brandy" -> "dog")
+
+    for ((k,v) <- map)
+      print(k + " " + v)
+
+  }
 
   def makeMutableMap: Unit ={
     var map = scala.collection.mutable.Map[String, Int]()
