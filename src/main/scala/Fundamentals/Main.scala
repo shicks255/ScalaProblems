@@ -19,10 +19,21 @@ object Main extends App{
 //  Utilities.makeAMap()
 //  Utilities.makeMutableMap
 //  Utilities.iterateOverMap
-  Utilities.sortedMap()
+//  Utilities.sortedMap()
+  Utilities.makeTuples()
+
 }
 
 object Utilities {
+
+  def zippingTuples() = {
+
+  }
+
+  def makeTuples() = {
+    var someTuple = "Steve Hicks".replace(" ", "").partition(_.isUpper)
+    println(someTuple)
+  }
 
   def sortedMap() = {
     val scores = scala.collection.mutable.SortedMap("Alice" -> 65,
