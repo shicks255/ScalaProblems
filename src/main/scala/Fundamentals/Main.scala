@@ -1,5 +1,8 @@
 package Fundamentals
 
+import java.io.File
+import java.util.Scanner
+
 import scala.collection.mutable.ArrayBuffer
 
 object Main extends App{
@@ -20,14 +23,67 @@ object Main extends App{
 //  Utilities.makeMutableMap
 //  Utilities.iterateOverMap
 //  Utilities.sortedMap()
-  Utilities.makeTuples()
-
+//  Utilities.makeTuples()
+//  Utilities.zippingTuples()
+//    Utilities.makeDiscountMapFromPriceMap()
+//    Utilities.readFromFile
+  Utilities.getMinAndMaxPair()
 }
 
 object Utilities {
 
-  def zippingTuples() = {
+  def getMinAndMaxPair() ={
+    val values = Array[Int](10, 20, 12, 14, 40, 42, 55, 1, 100)
+    val newValues = values.sorted
 
+    val smallest = newValues(0)
+    val biggest = newValues(newValues.length - 1)
+
+    val pair = (newValues(0), newValues(newValues.length-1))
+    println(pair)
+  }
+
+  def readFromFile = {
+    val input = new Scanner(new File("readFromFile.txt"))
+    var map = scala.collection.mutable.SortedMap[String, Int]()
+
+    while (input.hasNext())
+      {
+        val next: String = input.next()
+        if (next.length > 0)
+          {
+            next.replace(".", "")
+            val words = next.split(" ")
+            for (word <- words)
+              {
+                var count = map.getOrElse(word, 0)
+                count += 1
+                map(word) = count
+              }
+          }
+      }
+
+    for ((k,v) <- map)
+      println(k + " occurs " + v)
+
+  }
+
+  def makeDiscountMapFromPriceMap(): Unit =
+  {
+    val itemsPricesMap = Map("Video Card" -> 149.99, "CPU" -> 199.99, "Case" -> 119.99, "Ram 16gb" -> 59.99)
+    println(itemsPricesMap)
+
+    val discount = for ((k, v) <- itemsPricesMap) yield (k, v * .9)
+    println(discount)
+  }
+
+  def zippingTuples() = {
+    val names = Array("Steve", "M", "Eric", "Steph")
+    val ages = Array(29, 30, 30, 27)
+
+    val zipped = names.zip(ages)
+    for ((p1,p2) <- zipped)
+      println(p1 + " - " + p2)
   }
 
   def makeTuples() = {
