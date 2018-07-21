@@ -11,8 +11,8 @@ object Main extends App{
   val seq4 = Seq(4, 9, 9)
 
 
-//  println(comp(seq1, seq2)) // should return true;
-  println(comp(seq3, seq4)) // should return false;
+  println(comp(seq1, seq2)) // should return true;
+//  println(comp(seq3, seq4)) // should return false;
 
   def comp(seq1: Seq[Int], seq2: Seq[Int]): Boolean = {
 
@@ -25,9 +25,8 @@ object Main extends App{
     if ((seq1.isEmpty && !seq2.isEmpty) || (seq2.isEmpty && !seq1.isEmpty))
       return false
 
-    seq1.map(i => seq2.contains(i * i)).reduceLeft(_ && _)
+    val newSequence = seq1.map(x => x*x).sortWith(_ < _)
 
-
-
+    newSequence.equals(seq2.sortWith(_ < _))
   }
 }
