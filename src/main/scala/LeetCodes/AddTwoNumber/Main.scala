@@ -21,8 +21,10 @@ package LeetCodes.AddTwoNumber
 import scala.collection.mutable.ArrayBuffer
 
 object Main  extends App{
-  var node1 = new ListNode(5)
-  var node2 = new ListNode(5)
+  var node1 = new ListNode(1)
+  var node11 = new ListNode(8)
+  node1.next = node11
+  var node2 = new ListNode(0)
 
   var node3 = new ListNode(2)
   var node3a = new ListNode(4)
@@ -36,7 +38,7 @@ object Main  extends App{
   node4.next = node4a
   node4a.next = node4b
 
-  println(addTwoNumber(node3, node4))
+  println(addTwoNumber(node1, node2))
 
 
   def addTwoNumber(l1: ListNode, l2: ListNode): ListNode = {
@@ -56,7 +58,7 @@ object Main  extends App{
         nodeB = nodeB.next
       }
 
-    var nums = list1.zip(list2)
+    var nums = list1.zipAll(list2, new ListNode(0), new ListNode(0))
     var summedNodes :ArrayBuffer[ListNode] = nums.map(tup => new ListNode(tup._1.x + tup._2.x))
 
     for (i <- 0 until summedNodes.size)
