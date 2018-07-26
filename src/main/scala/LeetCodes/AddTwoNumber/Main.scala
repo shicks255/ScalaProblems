@@ -21,64 +21,58 @@ package LeetCodes.AddTwoNumber
 import scala.collection.mutable.ArrayBuffer
 
 object Main  extends App{
-  var node1 = new ListNode(2)
-  var node1_a = new ListNode(4)
-  var node1_b = new ListNode(3)
-  node1.next = node1_a
-  node1_a.next = node1_b
-
+  var node1 = new ListNode(5)
   var node2 = new ListNode(5)
-  var node2_a = new ListNode(6)
-  var node2_b = new ListNode(4)
-  node2.next = node2_a
-  node2_a.next = node2_b
 
-  println(addTwoNumber(node1, node2))
+  var node3 = new ListNode(2)
+  var node3a = new ListNode(4)
+  var node3b = new ListNode(3)
+  node3.next = node3a
+  node3a.next = node3b
+
+  var node4 = new ListNode(5)
+  var node4a = new ListNode(6)
+  var node4b = new ListNode(4)
+  node4.next = node4a
+  node4a.next = node4b
+
+  println(addTwoNumber(node3, node4))
 
 
-  def addTwoNumber(l1: ListNode, l2: ListNode): Unit = {
-    var carryTen: Boolean = false
+  def addTwoNumber(l1: ListNode, l2: ListNode): ListNode = {
+    var list1 :ArrayBuffer[ListNode] = ArrayBuffer()
+    var nodeA = l1;
+    while (nodeA != null)
+      {
+        list1 += nodeA;
+        nodeA = nodeA.next
+      }
 
-    var node1 = l1;
-    var node2 = l2
+    var list2 :ArrayBuffer[ListNode] = ArrayBuffer()
+    var nodeB = l2;
+    while (nodeB != null)
+      {
+        list2 += nodeB;
+        nodeB = nodeB.next
+      }
 
-    var numbers = new ArrayBuffer[Int]
+    var nums = list1.zip(list2)
+    var summedNodes :ArrayBuffer[ListNode] = nums.map(tup => new ListNode(tup._1.x + tup._2.x))
 
-    while (node1 != null && node2 != null)
-    {
-      val num1: Int = if (node1 != null) node1.x else 0
-      val num2: Int = if (node2 != null) node2.x else 0
+    for (i <- 0 until summedNodes.size)
+      {
+        if (summedNodes(i).x > 9)
+          {
+            summedNodes(i).x = summedNodes(i).x - 10
+            if (i == summedNodes.size-1)
+              summedNodes.append(new ListNode(1))
+            else
+              summedNodes(i+1).x = summedNodes(i+1).x + 1
+          }
+        if (i < summedNodes.size-1) summedNodes(i).next = summedNodes(i + 1)
+      }
 
-      var sum: Int = num1 + num2
-      if (carryTen)
-        {
-          carryTen = false
-          sum += 1
-        };
-
-      if (sum > 9)
-        {
-          sum = sum - 10
-          carryTen = true
-        };
-
-      node1 = node1.next
-      node2 = node2.next
-
-      numbers += sum
-    }
-
-    val nodes :ArrayBuffer[ListNode] = numbers.map(x => new ListNode(x))
-
-    val test = "test"
-
-    val node = nodes.reduceLeft(reduce())
-  }
-
-  def reduce(x :ListNode, y :ListNode): ListNode =
-  {
-    x.next = y
-    y
+    summedNodes(0)
   }
 }
 
