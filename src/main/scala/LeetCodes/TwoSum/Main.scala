@@ -25,8 +25,17 @@ object Main extends App{
   println(twoSum(nums, target).mkString(","))
 
   def twoSum(nums: Array[Int], target: Int): Array[Int] = {
+    var answer = new Array[Int](2)
+    val length: Int = nums.length
 
+    for (x <- 0 until length; i <- 0 until length; if x != i && nums(x) + nums(i) == target)
+      {
+        answer(0) = x
+        answer(1) = i
+        return answer
+      }
 
+    answer
   }
 
 }
