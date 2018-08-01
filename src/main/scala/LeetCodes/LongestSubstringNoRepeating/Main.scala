@@ -4,31 +4,20 @@ import scala.collection.mutable
 
 object Main extends App{
 
-  println(lengthOfLongestSubstring("pwwkew"))
+  println(lengthOfLongestSubstring2("pwwkew"))
 
-  def lengthOfLongestSubstring(s: String): Int = {
+  def lengthOfLongestSubstring2(s: String): Int = {
 
-    var size: Int = 0;
+    var size: Int = 0
+
     for (x <- 0 until s.length)
       {
-        val answer: Int = getUniques(s.substring(x))
-        if (answer > size)
-          size = answer
+        var set: mutable.HashSet[Char] = new mutable.HashSet[Char]()
+        val answer = s.substring(x).takeWhile(cha => set.add(cha))
+        if (answer.size > size) size = answer.size
       }
 
     size
   }
 
-  def getUniques(s: String): Int = {
-    var set: mutable.HashSet[Char] = new mutable.HashSet[Char]
-
-    var index = 0
-    while (index < s.size && set.contains(s.charAt(index)) == false )
-      {
-        set += s.charAt(index)
-        index += 1
-      }
-
-    set.size
-  }
 }
