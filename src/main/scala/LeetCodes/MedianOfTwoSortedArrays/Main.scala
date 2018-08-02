@@ -26,16 +26,26 @@ package LeetCodes.MedianOfTwoSortedArrays
 
 object Main extends App{
 
-  findMedianSortedArrays(Array(1,2,3), Array(2,4,6))
+  println(findMedianSortedArrays(Array(1,2,3), Array(2,4,6)))
 
   def findMedianSortedArrays(nums1: Array[Int], nums2: Array[Int]): Double = {
 
     val nums3 = nums1 ++ nums2
-
     val newSeq = nums3.toSeq.sorted
+    var answer: Double = 0
 
+    if (newSeq.size % 2 == 0)
+    {
+      val first = newSeq(newSeq.size/2)
+      val setcond = newSeq(newSeq.size/2 - 1)
+      answer = (first + setcond).doubleValue() / 2
+    }
+    else
+    {
+      answer = newSeq(newSeq.size/2)
+    }
 
-
-    2
+    answer
   }
+
 }
