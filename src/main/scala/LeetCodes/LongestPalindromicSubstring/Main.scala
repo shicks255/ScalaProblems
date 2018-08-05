@@ -14,20 +14,36 @@
   * Input: "cbbd"
   * Output: "bb"
   *
+  * Input: "abcdedcstoax"
+  * Output: "cdedc"
+  *
+  * Input: "abcdefgsste"
+  * Out: "ss"
+  *
   */
 
 package LeetCodes.LongestPalindromicSubstring
 
-import scala.collection.mutable
-
 object Main extends App {
 
-  longestPalindrome("aba")
+  println(longestPalindrome("babad"))
 
   def longestPalindrome(s: String): String = {
+    var windowPaneSize = s.length
+    while (windowPaneSize > 1)
+      {
+        var iter: Iterator[String] =  s.sliding(windowPaneSize)
+        while (iter.hasNext)
+          {
+            val string: String = iter.next()
+            if (isPalindrome(string))
+              return string
+          }
 
-    println(isPalindrome(s))
-    "S"
+        windowPaneSize -= 1
+      }
+
+    ""
   }
 
   def isPalindrome(s: String): Boolean = {
