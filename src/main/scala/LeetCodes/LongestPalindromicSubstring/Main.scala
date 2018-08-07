@@ -26,22 +26,22 @@ package LeetCodes.LongestPalindromicSubstring
 
 object Main extends App {
 
-  println(longestPalindrome("babad"))
+  println(longestPalindrome("jglknendplocymmvwtoxvebkekzfdhykknufqdkntnqvgfbahsljkobhbxkvyictzkqjqydczuxjkgecdyhixdttxfqmgksrkyvopwprsgoszftuhawflzjyuyrujrxluhzjvbflxgcovilthvuihzttzithnsqbdxtafxrfrblulsakrahulwthhbjcslceewxfxtavljpimaqqlcbrdgtgjryjytgxljxtravwdlnrrauxplempnbfeusgtqzjtzshwieutxdytlrrqvyemlyzolhbkzhyfyttevqnfvmpqjngcnazmaagwihxrhmcibyfkccyrqwnzlzqeuenhwlzhbxqxerfifzncimwqsfatudjihtumrtjtggzleovihifxufvwqeimbxvzlxwcsknksogsbwwdlwulnetdysvsfkonggeedtshxqkgbhoscjgpiel"))
 
   def longestPalindrome(s: String): String = {
     var windowPaneSize = s.length
-    while (windowPaneSize > 1)
+    while (windowPaneSize >= 1)
+    {
+      var iter: Iterator[String] =  s.sliding(windowPaneSize)
+      while (iter.hasNext)
       {
-        var iter: Iterator[String] =  s.sliding(windowPaneSize)
-        while (iter.hasNext)
-          {
-            val string: String = iter.next()
-            if (isPalindrome(string))
-              return string
-          }
-
-        windowPaneSize -= 1
+        val string: String = iter.next()
+        if (isPalindrome(string))
+          return string
       }
+
+      windowPaneSize -= 1
+    }
 
     ""
   }
