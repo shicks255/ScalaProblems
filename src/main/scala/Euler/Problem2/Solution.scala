@@ -17,24 +17,17 @@ package Euler.Problem2
 
 object Solution extends App{
 
-  findEvenFibonaccis(10)
+  println(findEvenFibonaccis(4000000))
 
   def findEvenFibonaccis(number: Int): Int = {
+    var nums = Vector(1, 2)
 
-    val range = 2 to number
+    while (nums.last < number)
+      nums = nums :+ nums.last + nums(nums.size-2)
 
-    val it = range.sliding(2)
-
-    var newSeq = Vector(1,2,3)
-
-    while (it.hasNext && newSeq.sum < 4000000)
-    {
-      val newInt: Int = it.next().sum
-      println(newInt)
-      newSeq = newSeq :+ newInt
-    }
-
-    1
+    val answer = nums.filter(x => x % 2 == 0).sum
+    answer
   }
+
 
 }
