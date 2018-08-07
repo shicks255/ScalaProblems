@@ -36,13 +36,12 @@ object Main extends App {
       while (iter.hasNext)
       {
         val string: String = iter.next()
-        if (isPalindrome(string))
+        if (string.equals(string.reverse))
           return string
       }
 
       windowPaneSize -= 1
     }
-
     ""
   }
 
