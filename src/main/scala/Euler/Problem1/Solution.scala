@@ -18,3 +18,8 @@ object Solution extends App{
   }
 
 }
+
+//166833
+// 99500
+// = 266333
+// - 33165
