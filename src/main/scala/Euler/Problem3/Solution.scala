@@ -9,20 +9,21 @@ package Euler.Problem3
 
 object Solution extends App{
 
-  var number = BigInt(600851475143l)
-//  var number = BigInt(600851475143l)
+//  var number = BigInt(21)
+  var number: Long = 600851475143l
 
   println(problem(number))
 
-  def problem(number: BigInt): BigInt = {
+  def problem(number: Long): Long = {
     var coursor = number-1
-    var answer = BigInt(0)
+    var answer: Long = 0
 
     while(coursor > 1)
     {
-      if (isPrime(coursor))
+      println(coursor)
+      if (number % coursor == 0)
       {
-        if (number % coursor == 0)
+        if (isPrime(coursor))
         {
           if (coursor > answer)
             answer = coursor
@@ -36,9 +37,9 @@ object Solution extends App{
   }
 
 
-  def isPrime(number: BigInt): Boolean = {
+  def isPrime(number: Long): Boolean = {
     var x = 2
-    while (x < number)
+    while (x < (number / 2))
     {
       if (number % x == 0)
         return false
