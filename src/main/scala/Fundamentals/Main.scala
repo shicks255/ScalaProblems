@@ -27,7 +27,19 @@ object Main extends App{
 //  Utilities.zippingTuples()
 //    Utilities.makeDiscountMapFromPriceMap()
 //    Utilities.readFromFile
-  Utilities.getMinAndMaxPair()
+//  Utilities.getMinAndMaxPair()
+
+  val names = Array("steve", "jo")
+  names.update(0, "aklfjaf")
+  println(names(0))
+
+  var list1 = List("steve", "eric", "chris")
+  var list2 = List("jo", "anna")
+  val combined = list1 ::: list2
+  println(combined)
+
+  val combined2 = "ashley" :: combined
+  print(combined2)
 }
 
 object Utilities {
