@@ -29,17 +29,17 @@ object Main extends App{
 //    Utilities.readFromFile
 //  Utilities.getMinAndMaxPair()
 
-  val names = Array("steve", "jo")
-  names.update(0, "aklfjaf")
-  println(names(0))
 
-  var list1 = List("steve", "eric", "chris")
-  var list2 = List("jo", "anna")
-  val combined = list1 ::: list2
-  println(combined)
+  val someMap = scala.collection.mutable.Map[String, Int]()
+  someMap += ("steve" -> 1)
+50
+  print(someMap)
 
-  val combined2 = "ashley" :: combined
-  print(combined2)
+  val immutableMap = Map("A" -> 1, "B" -> 2)
+//  immutableMap += ("D" -> 3)
+  val x = immutableMap + ("C" -> 3)
+  print(x)
+
 }
 
 object Utilities {
