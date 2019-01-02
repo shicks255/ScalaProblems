@@ -18,5 +18,7 @@ object Runner {
 
     println("Cats that are dead")
     println(Cat.catsDead().mkString(", "))
+
+
   }
 }
