@@ -18,9 +18,7 @@ object Solution extends App{
   def runSolution(upToNumber: Int): Int = {
 
     val divisors = List.range(1,upToNumber+1)
-    var answer = getAnswer(divisors.max, divisors)
-
-    answer
+    getAnswer(divisors.max, divisors)
   }
 
   @tailrec
