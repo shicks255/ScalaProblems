@@ -13,7 +13,7 @@ object Test  extends App{
         answer += number
     }
 
-    arr.foreach(x => printXTimes(x, n))
+    arr.foreach(x => printXTimes(x, num))
 
     answer.toList
   }
