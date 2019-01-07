@@ -20,6 +20,10 @@ trait EBook extends Product {
   override def getPrice: Double = super.getPrice - 4
   override def getName: String = super.getName + ": Ebook"
 }
+trait Used extends Product {
+  override def getPrice: Double = super.getPrice *.75
+  override def getName: String = super.getName + " - Used"
+}
 
 object bookRunner extends App {
   val paperBacks = new ListBuffer[Book]
@@ -30,9 +34,12 @@ object bookRunner extends App {
 
   val hardBooks = paperBacks.map(x => new Book(x.getName, x.getPrice) with Hardcover)
   val ebooks = paperBacks.map(x => new Book(x.getName, x.getPrice) with EBook)
-  val allBooks = List.concat(paperBacks, hardBooks, ebooks).sorted
+  var allBooks = List.concat(paperBacks, hardBooks, ebooks)
 
-  println(allBooks.mkString("\n"))
+  allBooks = new Book("Witches", 12) with Used :: allBooks
+  allBooks = new Book("Dracula", 8) with Used :: allBooks
+
+  println(allBooks.sorted.mkString("\n"))
 }
 
 
