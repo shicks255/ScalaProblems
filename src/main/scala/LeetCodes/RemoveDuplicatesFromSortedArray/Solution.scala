@@ -1,16 +1,35 @@
 package LeetCodes.RemoveDuplicatesFromSortedArray
 
+import scala.annotation.tailrec
+import scala.collection.mutable.ArrayBuffer
+
 object Solution extends App{
 
-  def removeDuplicates(nums: Array[Int]): Int = {
+  def removeDuplicates(nums: ArrayBuffer[Int]): Int = {
 
-     var set = Set()
+    removeDupes(nums, 1)
 
-//    val removeDupe = (nums: Array[Int]) =>
-    set.size
+    println(nums.mkString(","))
+
+    val answerSet = nums.toSet
+    answerSet.size
   }
 
-  assert(removeDuplicates(Array(1,1,2)) == 2)
-  assert(removeDuplicates(Array(0,0,1,1,1,2,2,3,3,4)) == 5)
+  @tailrec
+  def removeDupes(numbers: ArrayBuffer[Int], starting: Int): Unit = {
+    if (numbers(starting) == numbers(starting-1))
+      {
+        val swap = numbers.indexWhere(_ > numbers(starting-1))
+        val temp = numbers(swap)
+        numbers(swap) = numbers(starting)
+        numbers(starting) = temp
+      }
 
+    if (starting == numbers.size-1)
+      return
+    removeDupes(numbers, starting+1)
+  }
+
+//  assert(removeDuplicates(ArrayBuffer(1,1,2)) == 2)
+  assert(removeDuplicates(ArrayBuffer(0,0,1,1,1,2,2,3,3,4)) == 5)
 }
