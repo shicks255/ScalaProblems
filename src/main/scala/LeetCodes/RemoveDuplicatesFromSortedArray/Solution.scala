@@ -17,12 +17,15 @@ object Solution extends App{
 
   @tailrec
   def removeDupes(numbers: ArrayBuffer[Int], starting: Int): Unit = {
-    if (numbers(starting) == numbers(starting-1))
+    if (numbers(starting) <= numbers(starting-1))
       {
-        val swap = numbers.indexWhere(_ > numbers(starting-1))
-        val temp = numbers(swap)
-        numbers(swap) = numbers(starting)
-        numbers(starting) = temp
+        val swap = numbers.indexWhere(_ > numbers(starting-1), starting)
+        if (swap > 0)
+          {
+            val temp = numbers(swap)
+            numbers(swap) = numbers(starting)
+            numbers(starting) = temp
+          }
       }
 
     if (starting == numbers.size-1)
@@ -30,6 +33,7 @@ object Solution extends App{
     removeDupes(numbers, starting+1)
   }
 
-//  assert(removeDuplicates(ArrayBuffer(1,1,2)) == 2)
+  assert(removeDuplicates(ArrayBuffer(1,1,2)) == 2)
   assert(removeDuplicates(ArrayBuffer(0,0,1,1,1,2,2,3,3,4)) == 5)
+  assert(removeDuplicates(ArrayBuffer(0,0,0,0,0,0,0,0,0,0,0,1)) == 2)
 }
