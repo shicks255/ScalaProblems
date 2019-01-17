@@ -32,7 +32,7 @@ object Main extends App{
 
   val someMap = scala.collection.mutable.Map[String, Int]()
   someMap += ("steve" -> 1)
-50
+
   print(someMap)
 
   val immutableMap = Map("A" -> 1, "B" -> 2)

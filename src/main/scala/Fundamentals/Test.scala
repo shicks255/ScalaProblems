@@ -5,9 +5,9 @@ object Test extends App{
   val t = new Test()
   t.print
 
-  def tryThis(x: Test) = {
-    println(x);
-  }
+//  def tryThis(x: Test) = {
+//    println(x);
+//  }
 
 }
 
