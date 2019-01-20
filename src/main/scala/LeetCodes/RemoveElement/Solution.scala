@@ -27,10 +27,11 @@ object Solution extends App{
     }
     val answer = recursive(nums, `val`)
     println(answer)
-    if (answer < 0)
-      nums.size
-    else
-      answer
+
+    answer match {
+      case x if x < 0 => nums.size
+      case _ => answer
+    }
   }
 
   assert(removeElement(Array(3,2,2,3), 3) == 2)
