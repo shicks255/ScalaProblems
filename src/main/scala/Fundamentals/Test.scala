@@ -1,19 +1,20 @@
 package Fundamentals
 
+import scala.io.Source
+
 object Test extends App{
 
-  val t = new Test()
-  t.print
+  val files = Source.fromFile("readFromFile.txt", "UTF-8")
 
-//  def tryThis(x: Test) = {
-//    println(x);
-//  }
+  for (file <- files.getLines())
+    println(file)
 
-}
+  def scalaFiels = for (file <- files.getLines() if file.endsWith(".scala"))
+    yield file
 
-
-class Test[T] {
-
-  def print = println("hi");
+  for (file <- files.getLines()
+        if file.endsWith(".scala")
+        if file.length > 2)
+    println(file)
 
 }

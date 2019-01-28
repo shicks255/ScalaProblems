@@ -3,7 +3,6 @@ package Fundamentals.DatabasePractice
 object Runner extends App{
 
   val connection: MySQLConnection = new MySQLConnection("select * from purchases")
-
   val allPurchases = connection.getResults()
 //  println(allPurchases.mkString("\n, "))
 
@@ -17,4 +16,12 @@ object Runner extends App{
   } yield x
 
   println(under152.mkString("\n"))
+}
+
+
+object Runner2 extends App{
+  val connection: PostgresConnection = new PostgresConnection("select * from users")
+  val users = connection.getResults();
+
+  println(users)
 }

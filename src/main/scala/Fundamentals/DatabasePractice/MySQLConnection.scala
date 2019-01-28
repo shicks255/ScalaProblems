@@ -20,6 +20,7 @@ object MySQLConnection {
     var purchases = new ListBuffer[Purchase]
 
     try {
+      Class.forName("com.mysql.jdbc.Driver")
       var connection = DriverManager.getConnection(url, username, password)
       val statement = connection.createStatement()
       val rs = statement.executeQuery(query)
