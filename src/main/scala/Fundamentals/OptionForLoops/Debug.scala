@@ -2,57 +2,63 @@ package Fundamentals.OptionForLoops
 
 import scala.collection.mutable.ArrayBuffer
 
-case class User(val name: String, val password: String) {
+case class User(val name: String, val password: String)
+case class AddUserResult(val user: Option[User], val message: String) {
+  def map(f: Option[User] => Option[User]): AddUserResult = {
+    val newVal = f(user)
+    AddUserResult(newVal, message)
+  }
 
+  def flatMap(f: Option[User] => AddUserResult): AddUserResult = {
+    val newVal = f(user)
+    AddUserResult(newVal.user, message + newVal.message)
+  }
 }
 
-
 object Runner extends App {
-
   val users: ArrayBuffer[User] = new ArrayBuffer[User]()
+  val u: User = User("shicks", "ashleY1")
 
-  val u: User = User("shicks", "ashley")
-
-//  val u1:Option[User] = ensureUserNotExists(u)
-//  val u2:Option[User] = santizeUsername(u)
-//  val u3:Option[User] = sanitizePassword(u)
-
-  val something = sanitizePassword(santizeUsername(ensureUserNotExists(u)))
+  val something = for {
+    a <- ensureUserNameNotExistsWithResult(u)
+    b <- sanitizeUserNameWithResult(a)
+    c <- sanitizePasswordWithResult(b)
+  } yield c
   println(something)
 
-  def ensureUserNotExists(u: User): Option[User] = {
-    users.contains(u) match
-    {
-      case false => Some(u)
-      case true => None
+//  val something = sanitizePasswordWithResult(sanitizeUserNameWithResult(ensureUserNameNotExistsWithResult(u)))
+//  println(something)
+
+  def ensureUserNameNotExistsWithResult(u: User): AddUserResult = {
+    users.map(_.name).contains(u.name) match {
+      case false => AddUserResult(Some(u), "Username does not exists,")
+      case true => AddUserResult(None, "Username already exists,")
     }
   }
 
-  def santizeUsername(u: Option[User]): Option[User] = {
+  def sanitizeUserNameWithResult(u: Option[User]): AddUserResult = {
     if (u.nonEmpty)
-    {
-      if (u.get.name.length > 5)
-        Some(u)
-      else
-        None
-    }
-    None
+        u.get.name.length match {
+          case x if x > 5 => AddUserResult(u, "\nUsername is valid,")
+          case _ => AddUserResult(None, "Username too short,")
+        }
+    else
+      AddUserResult(None, "Invalid username,")
   }
 
-  def sanitizePassword(u: Option[User]): Option[User] = {
+  def sanitizePasswordWithResult(u: Option[User]): AddUserResult = {
     if (u.nonEmpty)
-    {
-      val p = u.get.password
-      val hasNumber: Boolean = p.exists(Character.isDigit(_))
-      val hasUpper: Boolean = p.exists(_.isUpper)
-
-      hasNumber && hasUpper match
       {
-        case true => Some(u)
-        case _ => None
+        val hasNumber: Boolean = u.get.password.exists(Character.isDigit(_))
+        val hasUpper: Boolean = u.get.password.exists(_.isUpper)
+
+        hasNumber && hasUpper match {
+          case true => AddUserResult(u, "\nValid password,")
+          case false => AddUserResult(None, "invalid password,")
+        }
       }
-    }
-    None
+    else
+      AddUserResult(None, "Invalid password,")
   }
 
 
