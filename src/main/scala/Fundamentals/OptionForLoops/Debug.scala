@@ -17,14 +17,20 @@ case class AddUserResult(val user: Option[User], val message: String) {
 
 object Runner extends App {
   val users: ArrayBuffer[User] = new ArrayBuffer[User]()
-  val u: User = User("shicks", "ashleY1")
+  val u: User = User("shicks", "passworD1")
 
-  val something = for {
-    a <- ensureUserNameNotExistsWithResult(u)
-    b <- sanitizeUserNameWithResult(a)
-    c <- sanitizePasswordWithResult(b)
-  } yield c
-  println(something)
+//  val something = for {
+//    a <- ensureUserNameNotExistsWithResult(u)
+//    b <- sanitizeUserNameWithResult(a)
+//    c <- sanitizePasswordWithResult(b)
+//  } yield c
+//  println(something)
+
+  val some1 = ensureUserNameNotExistsWithResult(u)
+    .flatMap(a => sanitizeUserNameWithResult(a)
+      .flatMap(b => sanitizePasswordWithResult(b)
+        .map(c => c)))
+  println(some1)
 
 //  val something = sanitizePasswordWithResult(sanitizeUserNameWithResult(ensureUserNameNotExistsWithResult(u)))
 //  println(something)
