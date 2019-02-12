@@ -2,14 +2,16 @@ package Fundamentals.OptionForLoops.LoginProgram.LoginResult
 
 import Fundamentals.OptionForLoops.LoginProgram.LoginResult.Runner.{LoginResult, RegularUser}
 
-import scala.collection.mutable.ArrayBuffer
-
 object AuthHelpers {
 
-  def userNameNotDuplicate(x: Option[RegularUser], users: ArrayBuffer[RegularUser]): LoginResult = {
+  def getUserService():UserService = {
+    new UserService()
+}
+
+  def userNameNotDuplicate(x: Option[RegularUser]): LoginResult = {
     if (x.nonEmpty)
     {
-      users.contains(x) match {
+      getUserService().userExists(x.get) match {
         case false => LoginResult(x, List("Username is valid"))
         case true => LoginResult(None, List("Username INVALID"))
       }
