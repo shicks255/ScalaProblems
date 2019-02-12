@@ -12,24 +12,27 @@ object Runner extends App{
   case class Admin(userName: String, password: String, id: Long, adminCode: Long) extends User {
   }
 
-  case class LoginResult(user: RegularUser, result: List[String]) {
-    def map(f: RegularUser => RegularUser) = {
-      val newUser: RegularUser = f(user)
+  case class LoginResult(user: Option[RegularUser], result: List[String]) {
+    def map(f: Option[RegularUser] => Option[RegularUser]) = {
+      val newUser: Option[RegularUser] = f(user)
       LoginResult(newUser, result)
     }
 
-    def flatMap(f: RegularUser => LoginResult): LoginResult = {
+    def flatMap(f: Option[RegularUser] => LoginResult): LoginResult = {
       val newUser: LoginResult = f(user)
       LoginResult(newUser.user, newUser.result ::: result)
     }
 
     override def toString: String = {
-      val st = user.toString
+      val st = user match {
+        case Some(x) => x.userName + " " + x.password
+        case None => "err"
+      }
       val st1 = for {
         a <- result.zipWithIndex
-      } yield a._2 + " " + a._1
+      } yield (a._2 + " " + a._1)
 
-      st + st1
+      st + " " + st1.foldLeft("")((i,s) => i + "-" + s)
     }
   }
   val users: ArrayBuffer[RegularUser] = ArrayBuffer[RegularUser]()
@@ -38,30 +41,45 @@ object Runner extends App{
   println(user)
 
   val verifiedUser = for {
-    a <- userNameNotDuplicate(user)
+    a <- userNameNotDuplicate(Some(user))
     b <- userNameLongEnough(a)
     c <- passwordLongEnough(b)
   } yield c
   println(verifiedUser)
 
 
-  def userNameNotDuplicate(x: RegularUser): LoginResult = {
-    users.contains(x) match {
-      case false => LoginResult(x, List("Username is valid"))
-      case true => LoginResult(x, List("Username INVALID"))
+  def userNameNotDuplicate(x: Option[RegularUser]): LoginResult = {
+    if (x.nonEmpty)
+    {
+      users.contains(x) match {
+        case false => LoginResult(x, List("Username is valid"))
+        case true => LoginResult(None, List("Username INVALID"))
+      }
     }
+    else
+      LoginResult(None, List("Username INVALID"))
   }
-  def userNameLongEnough(x: RegularUser): LoginResult = {
-    x.userName.length match {
-      case y if y > 5 => LoginResult(x, List("Username is long enough"))
-      case _ => LoginResult(x, List("Username is not long enough"))
+  def userNameLongEnough(x: Option[RegularUser]): LoginResult = {
+    if (x.nonEmpty)
+    {
+      x.get.userName.length match {
+        case y if y > 5 => LoginResult(x, List("Username is long enough"))
+        case _ => LoginResult(None, List("Username is not long enough"))
+      }
     }
+    else
+      LoginResult(None, List("Username is not long enough"))
   }
-  def passwordLongEnough(x: RegularUser): LoginResult = {
-    x.password.length match {
-      case y if y > 5 => LoginResult(x, List("Password is long enough"))
-      case _ => LoginResult(x, List("Password is not long enough"))
+  def passwordLongEnough(x: Option[RegularUser]): LoginResult = {
+    if (x.nonEmpty)
+    {
+      x.get.password.length match {
+        case y if y > 5 => LoginResult(x, List("Password is long enough"))
+        case _ => LoginResult(None, List("Password is not long enough"))
+      }
     }
+    else
+      LoginResult(None, List("Password is not long enough"))
   }
 
 }
