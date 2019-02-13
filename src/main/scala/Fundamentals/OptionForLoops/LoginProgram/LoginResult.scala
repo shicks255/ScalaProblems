@@ -1,14 +1,13 @@
-package Fundamentals.OptionForLoops.LoginProgram.LoginResult
+package Fundamentals.OptionForLoops.LoginProgram
 
-import Fundamentals.OptionForLoops.LoginProgram.LoginResult.Runner.RegularUser
+case class LoginResult(user: Option[RegularUser], result: List[String]) extends Monad[Option[RegularUser], LoginResult] {
 
-case class LoginResult(user: Option[RegularUser], result: List[String]) {
-  def map(f: Option[RegularUser] => Option[RegularUser]) = {
+  override def map(f: Option[RegularUser] => Option[RegularUser]) = {
     val newUser: Option[RegularUser] = f(user)
     LoginResult(newUser, result)
   }
 
-  def flatMap(f: Option[RegularUser] => LoginResult): LoginResult = {
+  override def flatMap(f: Option[RegularUser] => LoginResult): LoginResult = {
     val newUser: LoginResult = f(user)
     LoginResult(newUser.user, newUser.result ::: result)
   }

@@ -1,6 +1,4 @@
-package Fundamentals.OptionForLoops.LoginProgram.LoginResult
-
-import Fundamentals.OptionForLoops.LoginProgram.LoginResult.Runner.{LoginResult, RegularUser}
+package Fundamentals.OptionForLoops.LoginProgram
 
 object AuthHelpers {
 

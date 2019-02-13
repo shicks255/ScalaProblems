@@ -1,6 +1,5 @@
-package Fundamentals.OptionForLoops.LoginProgram.LoginResult
+package Fundamentals.OptionForLoops.LoginProgram
 
-import Fundamentals.OptionForLoops.LoginProgram.LoginResult.Runner.RegularUser
 
 class UserService {
   var users: Set[RegularUser] = Set[RegularUser]()
