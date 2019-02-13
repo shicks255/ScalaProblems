@@ -18,6 +18,10 @@ object Functions {
     f(a)
   }
 
+  def genericFunction3[A,B](f: A => B, f2: B => A, a: A): A = {
+    f2(f(a))
+  }
+
   def checkIfWordIsLongEnough(s: => String, f: => Int) = {
     if (s.length > f)
       println(s"$s is long enough")

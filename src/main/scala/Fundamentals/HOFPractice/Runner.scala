@@ -22,7 +22,6 @@ object Runner extends App{
   println(genericFunction[Int, Int](i => i*2, 2))
 
   //similar to above, but partially applying
-
   val squarer = genericFunction2[Int, Int](i => i*i) _
   println(squarer(5))
 
@@ -31,6 +30,9 @@ object Runner extends App{
   println(curriedStrToInt("input") {
     s => s.length + 1
   })
+
+  val answer = genericFunction3[String, Int](s => s.toInt, i => (i*i).toString, "4")
+  println(answer)
 
   //this is using by name, so it
   checkIfWordIsLongEnough("wordf", 4)

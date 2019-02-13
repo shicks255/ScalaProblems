@@ -4,8 +4,15 @@ import scala.io.StdIn.readLine
 
 object Test extends App{
 
-//  promptUser("Enter a username").flatMap(x => getInput()).map(c => c)
+  promptUser("Enter a username").flatMap(x => getInput()).map(c => c)
 
-//  def promptUser(s: String): IO = IO(a => println(s) + "")
-//  def getInput(): IO = IO({a: String => readLine()})
+  for {
+    _ <- promptUser("hi")
+    _ <- promptUser("hi2")
+    _ <- promptUser("hi3")
+    _ <- promptUser("hi4")
+  } yield ()
+
+  def promptUser(s: String): IO[Unit] = IO(println(s))
+  def getInput(): IO[String] = IO(readLine())
 }

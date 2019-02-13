@@ -12,17 +12,17 @@
 //  @tailrec
 //  def program(): Unit = {
 //
-//    val user: String = for {
-//      _ <- promptUser("Enter a username")
-//      u <- getInput()
-//      _ <- promptUser("Now enter a password")
-//      p <- getInput()
-//    } yield RegularUser(u.toString, p.toString)
-//
-//    promptUser("Enter a username").flatMap(_ => getInput())
-//
-//
-//    val result = verifyUser(user)
+////    val user: String = for {
+////      _ <- promptUser("Enter a username")
+////      u <- getInput()
+////      _ <- promptUser("Now enter a password")
+////      p <- getInput()
+////    } yield RegularUser(u.toString, p.toString)
+////
+////    promptUser("Enter a username").flatMap(_ => getInput())
+////
+////
+////    val result = verifyUser(user)
 //
 //    val response = result match {
 //      case LoginResult(None, xs) => "invalid..." + xs.foldLeft("")(_ + " " + _)
