@@ -1,4 +1,4 @@
-package Fundamentals.FunctionalProgrammingInScala
+package Fundamentals.FunctionalProgrammingInScala.Chapter2
 
 object Excersises {
 
