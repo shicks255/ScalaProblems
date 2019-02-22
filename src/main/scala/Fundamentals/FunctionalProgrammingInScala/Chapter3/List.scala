@@ -24,13 +24,28 @@ object List {
       Cons(a.head, apply(a.tail: _*))
   }
 
+//  def get[A](index: Int): A = {
+//
+//  }
+
 }
 
-object runn extends App {
+object run extends App {
 
-  val l = List(1,2,3,4)
+//  val l = List(1,2,3,4)
+//
+//  println(l)
+//  println(List.sum(l))
+//  println(List.product(l))
 
-  println(l)
-  println(List.sum(l))
-  println(List.product(l))
+  val x = List(1,2,3,4,5) match {
+    case Cons(x, Cons(2, Cons(4, _))) => x
+    case Nil => 42
+    case Cons(x, Cons(y, Cons(3, Cons(4, _)))) => x + y
+    case Cons(h, t) => h + List.sum(t)
+    case _ => 101
+  }
+
+  println(x)
+
 }
