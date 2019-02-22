@@ -8,6 +8,10 @@ object Runner extends App{
   import MySpeakers.speakingDog
   import SpeakerAPI.SpeakingDog
 
-  val d = new Dog("brandy")
+  val d = Dog("brandy")
   d.speak
+
+  val d2 = Dog("penny")
+  d2.speak
+
 }

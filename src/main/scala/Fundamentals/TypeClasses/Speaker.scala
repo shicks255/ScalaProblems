@@ -7,7 +7,7 @@ trait Speaker[T]{
 object MySpeakers {
   implicit val speakingDog = new Speaker[Dog] {
     def speak(dog: Dog): Unit = {
-      println("ahhhhhhhhhhhhhhh")
+      println(s"the dog is ${dog.name}")
     }
   }
 }
