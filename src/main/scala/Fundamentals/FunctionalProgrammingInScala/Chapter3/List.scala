@@ -44,6 +44,13 @@ object List {
     }
   }
 
+  def dropWhileCurried[A](list: List[A])(f: A => Boolean) = {
+    list match {
+      case Nil => Nil
+      case Cons(h, t) => if (f(h)) dropWhile(f,t) else Cons(h,t)
+    }
+  }
+
   def setHead[A](a: A, list: List[A]): List[A] = {
     list match {
       case Nil => Cons(a, Nil)
@@ -83,12 +90,21 @@ object run extends App {
   println(List.drop(0, list))
 
   val emptyList: List[Int] = Nil
+  println("tail:")
   println(List.tail(emptyList))
+  println("sethead:")
   println(List.setHead("test", list))
+  println("drop while")
   println(List.dropWhile[Int]((a: Int) => a <= 4, list))
+  println("drop while curried:")
+  println(List.dropWhileCurried(list)(_ < 5))
+  println("get")
   println(List.get(3, list))
+  println("get")
   println(List.get(5, list))
+  println("append")
   println(List.append(List(), List(1,2,3)))
+  println("init")
   println(List.init(list))
 
 //  val l = List(1,2,3,4)
