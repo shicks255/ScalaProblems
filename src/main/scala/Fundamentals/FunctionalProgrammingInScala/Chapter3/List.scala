@@ -51,9 +51,27 @@ object List {
     }
   }
 
-//  def get[A](index: Int): A = {
-//
-//  }
+  def get[A](index: Int, list: List[A]): Option[A] = {
+    list match {
+      case Nil => None
+      case Cons(h, t) => if (index == 0) Some(h) else get(index-1, t)
+    }
+  }
+
+  def append[A](list: List[A], listFront: List[A]): List[A] = {
+    listFront match {
+      case Nil => list
+      case Cons(h, t) => Cons(h, append(list, t))
+    }
+  }
+
+  def init[A](list: List[A]): List[A] = {
+    list match {
+      case Nil => Nil
+      case Cons(h, Nil) => Nil
+      case Cons(h, t) => Cons(h, init(t))
+    }
+  }
 
 }
 
@@ -68,6 +86,10 @@ object run extends App {
   println(List.tail(emptyList))
   println(List.setHead("test", list))
   println(List.dropWhile[Int]((a: Int) => a <= 4, list))
+  println(List.get(3, list))
+  println(List.get(5, list))
+  println(List.append(List(), List(1,2,3)))
+  println(List.init(list))
 
 //  val l = List(1,2,3,4)
 //
