@@ -80,11 +80,22 @@ object List {
     }
   }
 
-  def foldRight[A, B](list: List[A], b: B)(f: A => B): B = {
+  def foldRight[A, B](list: List[A], b: B)(f: (A,B) => B): B = {
     list match {
       case Nil => b
-      case (h, t) => foldRight()
+      case Cons(h, t) => f(h, foldRight(t, b)(f))
     }
+  }
+
+  def foldLeft[A,B](list: List[A], b: B)(f: (A,B) => B): B = {
+    list match {
+      case Nil => b
+      case Cons(h, t) => foldLeft(t, f(h,b))(f)
+    }
+  }
+
+  def length[A](list: List[A]): Int = {
+    foldRight(list, 0)((x,y) => y+1)
   }
 
 }
@@ -113,6 +124,14 @@ object run extends App {
   println(List.append(List(), List(1,2,3)))
   println("init")
   println(List.init(list))
+  println("foldRight")
+  println(List.foldRight(List(1,2,3), 0)(_+_))
+  println("length")
+  println(List.length(List(1,2,3,4,5)))
+  println("foldLeft")
+  println(List.foldLeft(List("p", "e", "n", "c", "i", "l"), "")(_+_))
+  println("foldRight")
+  println(List.foldRight(List("p", "e", "n", "c", "i", "l"), "")(_+_))
 
 //  val l = List(1,2,3,4)
 //
