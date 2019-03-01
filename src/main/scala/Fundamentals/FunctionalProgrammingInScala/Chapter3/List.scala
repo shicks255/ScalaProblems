@@ -80,6 +80,13 @@ object List {
     }
   }
 
+  def foldRight[A, B](list: List[A], b: B)(f: A => B): B = {
+    list match {
+      case Nil => b
+      case (h, t) => foldRight()
+    }
+  }
+
 }
 
 object run extends App {
