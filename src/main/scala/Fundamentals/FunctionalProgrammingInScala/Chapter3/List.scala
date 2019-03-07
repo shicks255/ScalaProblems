@@ -98,6 +98,18 @@ object List {
     foldRight(list, 0)((x,y) => y+1)
   }
 
+  def sumFoldLeft() = {
+
+  }
+
+  def productFoldLeft = {
+
+  }
+
+  def lengthFoldLeft() = {
+
+  }
+
 }
 
 object run extends App {
