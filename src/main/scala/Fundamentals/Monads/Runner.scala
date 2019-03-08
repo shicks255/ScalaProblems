@@ -18,23 +18,22 @@ object Runner  extends App {
   }
   object IO {
     def apply[A](f: => A): IO[A] = new IO(f)
+//    override def toString[A](io: IO[A]): String = super.toStrin
   }
 
-  def getInput(): String = {
+  def getInput(): IO[String] = {
     val input = readLine()
-    input
+    IO(input)
   }
 
-//  val x = getInput()
-//    .flatMap(() => getInput())
-//      .map(() => "")
-//
-//  println(x)
+  val x = getInput()
+    .map(n => getInput())
+  println(x)
 
   val answer = for {
     n <- getInput()
     b <- getInput()
-  } yield n + " " + b
+  } yield n + "" + b
 
   println(answer)
 }
