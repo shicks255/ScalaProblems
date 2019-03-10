@@ -145,6 +145,13 @@ object run extends App {
   println("foldRight")
   println(List.foldRight(List("p", "e", "n", "c", "i", "l"), "")(_+_))
 
+  val test = for {
+    x <- Some(List(1,2,3))
+    y <- Some(List(4,5,6))
+  } yield List.append(x, y)
+
+  println(test.get)
+
 //  val l = List(1,2,3,4)
 //
 //  println(l)

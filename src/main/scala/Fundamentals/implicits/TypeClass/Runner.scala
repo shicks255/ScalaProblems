@@ -6,7 +6,7 @@ import SpeakerAPI._
 
 object Runner extends App{
   val p = Parrot
-  p.speak
+//  p.speak
 }
 
 case class Dog()
