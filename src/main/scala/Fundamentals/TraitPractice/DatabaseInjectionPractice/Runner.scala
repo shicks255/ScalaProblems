@@ -2,6 +2,29 @@ package Fundamentals.TraitPractice.DatabaseInjectionPractice
 
 object Runner extends App{
 
+  val dbService: MyTestService[Int] = MyTestService[Int]
+  dbService.drop(4)
+  dbService.query()
+  dbService.add(3)
+  dbService.checkInventory
+}
+
+case class MyTestService[A]() extends Service[A]
+
+trait Service[A] extends Inventory[A] with Datastore[A] {
+  override val database: DatabaseImp[A] = new DatabaseImp[A]
+}
+
+trait Inventory[A] {
+  val database: DatabaseImp[A]
+
+  def checkInventory = {
+    val result = database.query()
+    result match {
+      case None => println("nothing in stock")
+      case _ => println("Error occured")
+    }
+  }
 }
 
 trait Datastore[A] {
